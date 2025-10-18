@@ -168,7 +168,8 @@
     "type": "Vape Pens",
     "image": "vape2.png",
     "prices": {
-      ".5g": 30
+      ".5g": 30,
+      "1g": 50
     }
   },
   {
@@ -184,7 +185,8 @@
     "type": "Vape Pens",
     "image": "vape4.png",
     "prices": {
-      "0.5g": 30
+      "0.5g": 30,
+      "1g": 50
     }
   },
   {
@@ -192,7 +194,8 @@
     "type": "Vape Pens",
     "image": "vape5.png",
     "prices": {
-      "0.5g": 35
+      "0.5g": 35,
+      "1g" : 65
     }
   },
   {
@@ -200,7 +203,7 @@
     "type": "Vape Pens",
     "image": "vape3.png",
     "prices": {
-      "1": 50
+      "1g": 50
     }
   },
   {
@@ -226,7 +229,7 @@
     "type": "Vape Pens",
     "image": "vape8.png",
     "prices": {
-      "1": 55
+      "1g": 55
     }
   },
   {
@@ -234,7 +237,8 @@
     "type": "Vape Pens",
     "image": "vape8.png",
     "prices": {
-      "0.5g": 45
+      "0.5g": 45,
+       "1g" : 85
     }
   },
    {
