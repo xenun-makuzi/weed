@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weed Map Store | Natural Remedies & Herbal Medicines</title>
+<meta name="description" content="Grandpa's Herbs offers natural remedies and herbal medicines for holistic well-being. Shop flowers, leaves, and herbal products online.">
+<meta name="keywords" content="herbal medicine, natural remedies, herbs, flowers, holistic, Grandpa's Herbs">
+<meta name="author" content="Grandpa's Herbs">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .type-btn.selected { background-color:#16a34a; color:white; }
+  .herb-card:hover { transform:translateY(-5px); transition:transform .3s; }
+  .size-btn.selected { background-color:#15803d; color:white; }
+  .autocomplete-list{position:absolute;z-index:30;background:white;border:1px solid #ccc;width:100%;border-radius:8px;max-height:220px;overflow:auto;}
+  .autocomplete-item{padding:8px;cursor:pointer;}
+  .autocomplete-item:hover{background:#def7e2;}
+  #cart-popup{position:fixed;top:20px;right:20px;background:#16a34a;color:white;padding:10px 20px;border-radius:8px;display:none;z-index:1000;}
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- Cart Popup -->
+<div id="cart-popup">Added to Cart ✅</div>
+
+<!-- Navbar -->
+<nav class="bg-green-700 text-white sticky top-0 z-50 shadow">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">🌿 Weed Map</h1>
+    <div class="flex space-x-6 items-center">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="#herbs" class="hover:underline">Store</a>
+      <a href="login.html" class="hover:underline">Login</a>
+      <a href="cart.html" class="hover:underline flex items-center gap-1">🛒 
+        <span id="cart-count" class="bg-yellow-400 text-black px-1 rounded-full text-sm">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Intro -->
+<section class="bg-green-100 py-12 text-center">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-green-800">Welcome to Weed Map</h2>
+    <p class="mt-4 text-gray-700 text-lg">Everything You Want and More.Browse through our extensive catalogue if you don't find what you need conyact support</p>
+  </div>
+</section>
+
+<!-- SEARCH (added) -->
+<section class="max-w-7xl mx-auto px-6 py-6">
+  <div class="max-w-md mx-auto relative">
+    <input id="search-box" type="text" placeholder="Search herbs by name or type..." 
+           class="w-full px-4 py-2 border rounded-full shadow-sm focus:ring-2 focus:ring-green-400" autocomplete="off" />
+    <button id="search-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-700 text-white px-3 py-1 rounded-full hover:bg-green-800">🔍</button>
+    <div id="autocomplete" class="autocomplete-list hidden" role="listbox"></div>
+  </div>
+</section>
+
+<!-- Filters -->
+<section class="max-w-7xl mx-auto px-6 py-0">
+  <div class="flex flex-wrap gap-2 mb-4 justify-center">
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300 selected" data-type="All">All</button>
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300" data-type="Flower">Flower</button>
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300" data-type="Vape Pens">Vape Pens</button>
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300" data-type="Edibles">Edibles</button>
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300" data-type="Concentrates">Concentrates</button>
+    <button class="type-btn bg-green-200 text-green-800 px-4 py-2 rounded-full hover:bg-green-300" data-type="Herb 5">Herb 5</button>
+  </div>
+</section>
+
+<!-- Herb Grid -->
+<section id="herbs" class="max-w-7xl mx-auto px-6 py-6">
+  <div id="herb-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center"></div>
+  <div class="text-center mt-6">
+    <button id="view-more" class="bg-green-700 text-white px-6 py-2 rounded-full hover:bg-green-800">View More</button>
+    <button id="view-less" class="bg-gray-400 text-white px-6 py-2 rounded-full hover:bg-gray-500 hidden">View Less</button>
+  </div>
+</section>
+
+<!-- Delivery & Trust -->
+<section class="bg-green-50 py-12 text-center">
+  <div class="max-w-5xl mx-auto px-6">
+    <h3 class="text-2xl font-bold text-green-700 mb-6">Why Choose Grandpa’s Herbs?</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-semibold text-lg mb-2">Fast Delivery</h4>
+        <p class="text-gray-700">We deliver your product right to your doorstep, safe and fresh.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-semibold text-lg mb-2">5+ Years Experience</h4>
+        <p class="text-gray-700">Over 1400 satisfied clients trust us for their herbal needs.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-semibold text-lg mb-2">Reliable & Trusted</h4>
+        <p class="text-gray-700">Our herbs are pure, natural, and consistently high quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="bg-green-100 py-12">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h3 class="text-2xl font-bold text-green-700 mb-6">What Our Customers Say</h3>
+    <div class="relative">
+      <div id="carousel" class="overflow-hidden">
+        <div id="review-cards" class="flex transition-transform duration-500">
+          <div class="min-w-full p-6"><p class="italic">“They are pure and effective.”</p><div class="text-yellow-500">⭐⭐⭐⭐⭐</div><h4 class="mt-2 font-semibold">— Miriam K.</h4></div>
+          <div class="min-w-full p-6"><p class="italic">“This is quality stuff”</p><div class="text-yellow-500">⭐⭐⭐⭐</div><h4 class="mt-2 font-semibold">— John D.</h4></div>
+          <div class="min-w-full p-6"><p class="italic">“Quick delivery and great service.”</p><div class="text-yellow-500">⭐⭐⭐⭐⭐</div><h4 class="mt-2 font-semibold">— Sarah M.</h4></div>
+          <div class="min-w-full p-6"><p class="italic">“Reliable and trustworthy.”</p><div class="text-yellow-500">⭐⭐⭐⭐⭐</div><h4 class="mt-2 font-semibold">— David L.</h4></div>
+          <div class="min-w-full p-6"><p class="italic">“High-quality and affordable.”</p><div class="text-yellow-500">⭐⭐⭐⭐⭐</div><h4 class="mt-2 font-semibold">— Emily R.</h4></div>
+        </div>
+      </div>
+      <button onclick="prevSlide()" class="absolute top-1/2 left-2 bg-green-700 text-white px-3 py-1 rounded-full">‹</button>
+      <button onclick="nextSlide()" class="absolute top-1/2 right-2 bg-green-700 text-white px-3 py-1 rounded-full">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-green-700 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+    <p>&copy; 2025 Weed  Maps. All rights reserved.</p>
+    <div class="space-x-4 mt-3 md:mt-0">
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <a href="#" class="hover:underline">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Script -->
+<script>
+let herbs = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let currentIndex = 0, pageSize = 10, filteredHerbs = [];
+const grid=document.getElementById('herb-grid');
+const cartCount=document.getElementById('cart-count');
+cartCount.textContent=cart.length;
+
+// Elements for search/autocomplete
+const searchBox = document.getElementById('search-box');
+const searchBtn = document.getElementById('search-btn');
+const autocomplete = document.getElementById('autocomplete');
+
+// Load data
+fetch('herbs.json').then(r=>r.json()).then(data=>{
+  herbs=data;
+  filteredHerbs=herbs;
+  displayHerbs();
+}).catch(err=>{ console.error(err); });
+
+// Display herbs (respects filteredHerbs & pagination)
+function displayHerbs(){
+  grid.innerHTML='';
+  const slice=filteredHerbs.slice(0,currentIndex+pageSize);
+  if(slice.length===0){
+    grid.innerHTML = '<p class="text-center text-gray-500">No herbs found.</p>';
+  }
+  slice.forEach(h=>{
+    const card=document.createElement('div');
+    card.className='herb-card bg-white p-6 rounded-3xl shadow flex flex-col items-center text-center w-64';
+    card.innerHTML=`
+      <img src="${h.image}" alt="${h.name}" class="rounded-full w-40 h-40 object-cover">
+      <h4 class="mt-3 font-semibold text-lg text-green-800">${h.name}</h4>
+      <p class="text-gray-600">Type: ${h.type}</p>
+      <div class="flex gap-1 mt-3 flex-wrap justify-center">
+        ${Object.keys(h.prices).map(s=>`<button class="size-btn border border-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-100" data-size="${s}" data-price="${h.prices[s]}">${s}</button>`).join('')}
+      </div>
+      <p class="mt-2 font-bold text-green-700 hidden price-display"></p>
+      <button class="mt-3 w-full bg-green-700 text-white py-2 rounded-full hover:bg-green-800 add-cart">Add to Cart</button>
+    `;
+    const sizeBtns=card.querySelectorAll('.size-btn');
+    const priceDisplay=card.querySelector('.price-display');
+    let selected='1g';
+    sizeBtns.forEach(btn=>{
+      if(btn.dataset.size==='1g'){btn.classList.add('selected');priceDisplay.textContent=`$${btn.dataset.price} (1g)`;priceDisplay.classList.remove('hidden');}
+      btn.addEventListener('click',()=>{
+        sizeBtns.forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selected=btn.dataset.size;
+        priceDisplay.textContent=`$${btn.dataset.price} (${selected})`;
+        priceDisplay.classList.remove('hidden');
+      });
+    });
+    card.querySelector('.add-cart').addEventListener('click',()=>{
+      addToCart({...h,selectedSize:selected,price:h.prices[selected]});
+    });
+    grid.appendChild(card);
+  });
+
+  document.getElementById('view-more').classList.toggle('hidden', (currentIndex + pageSize) >= filteredHerbs.length);
+  document.getElementById('view-less').classList.toggle('hidden', currentIndex === 0);
+}
+
+/* ---------- Pagination ---------- */
+document.getElementById('view-more').addEventListener('click',()=>{
+  currentIndex += pageSize;
+  displayHerbs();
+});
+document.getElementById('view-less').addEventListener('click',()=>{
+  currentIndex = 0;
+  displayHerbs();
+});
+
+/* ---------- Add to Cart ---------- */
+function addToCart(item){
+  cart.push(item);
+  localStorage.setItem('cart',JSON.stringify(cart));
+  cartCount.textContent=cart.length;
+  const pop=document.getElementById('cart-popup');
+  pop.style.display='block';
+  setTimeout(()=>pop.style.display='none',2000);
+}
+
+/* ---------- Type Filters ---------- */
+document.querySelectorAll('.type-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const type=btn.dataset.type;
+    currentIndex=0;
+    filteredHerbs=(type==='All')?herbs:herbs.filter(h=>h.type===type);
+    // If there's a search value, apply search on top of type filter
+    const s = searchBox.value.trim().toLowerCase();
+    if(s){
+      filteredHerbs = filteredHerbs.filter(h => h.name.toLowerCase().includes(s) || h.type.toLowerCase().includes(s));
+    }
+    displayHerbs();
+  });
+});
+
+/* ---------- SEARCH & AUTOCOMPLETE ---------- */
+
+// Build suggestions from herbs (called when data is loaded)
+function getSuggestions(query){
+  if(!query) return [];
+  const q = query.toLowerCase();
+  // unique by name
+  const seen = new Set();
+  const suggestions = [];
+  for(const h of herbs){
+    if(suggestions.length >= 12) break;
+    if(h.name.toLowerCase().includes(q) || h.type.toLowerCase().includes(q)){
+      if(!seen.has(h.name)){
+        seen.add(h.name);
+        suggestions.push(h.name);
+      }
+    }
+  }
+  return suggestions;
+}
+
+function showAutocomplete(query){
+  const list = getSuggestions(query);
+  if(list.length === 0){
+    autocomplete.classList.add('hidden');
+    autocomplete.innerHTML = '';
+    return;
+  }
+  autocomplete.innerHTML = list.slice(0,6).map(item => `<div class="autocomplete-item" role="option">${item}</div>`).join('');
+  autocomplete.classList.remove('hidden');
+
+  // attach click handlers
+  autocomplete.querySelectorAll('.autocomplete-item').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      searchBox.value = el.textContent;
+      autocomplete.classList.add('hidden');
+      applySearch();
+    });
+  });
+}
+
+// apply search: filters filteredHerbs by search input & type, resets pagination
+function applySearch(){
+  const q = searchBox.value.trim().toLowerCase();
+  // apply type filter first
+  const activeTypeBtn = document.querySelector('.type-btn.selected');
+  const type = activeTypeBtn ? activeTypeBtn.dataset.type : 'All';
+  filteredHerbs = (type === 'All') ? herbs.slice() : herbs.filter(h => h.type === type);
+  if(q){
+    filteredHerbs = filteredHerbs.filter(h => h.name.toLowerCase().includes(q) || h.type.toLowerCase().includes(q));
+  }
+  currentIndex = 0;
+  displayHerbs();
+}
+
+// search input events
+searchBox.addEventListener('input', (e)=>{
+  const q = e.target.value;
+  if(q.length > 0) showAutocomplete(q);
+  else { autocomplete.classList.add('hidden'); autocomplete.innerHTML=''; }
+  // live-filtering as user types (optional); comment out if not desired:
+  applySearch();
+});
+
+// click search button
+searchBtn.addEventListener('click', (e)=>{
+  e.preventDefault();
+  applySearch();
+  autocomplete.classList.add('hidden');
+});
+
+// hide autocomplete when clicking outside
+document.addEventListener('click', (e)=>{
+  if(!document.getElementById('search-box').contains(e.target) && !autocomplete.contains(e.target)){
+    autocomplete.classList.add('hidden');
+  }
+});
+
+// allow Enter to search and Arrow navigation
+searchBox.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){ e.preventDefault(); applySearch(); autocomplete.classList.add('hidden'); }
+  if(e.key === 'ArrowDown'){ 
+    const first = autocomplete.querySelector('.autocomplete-item');
+    if(first){ first.focus(); }
+  }
+});
+
+/* ---------- Carousel ---------- */
+const reviews=document.getElementById('review-cards');
+let idx=0;
+function showSlide(){ reviews.style.transform=`translateX(${-idx*100}%)`; }
+function nextSlide(){ idx=(idx+1)%reviews.children.length; showSlide(); }
+function prevSlide(){ idx=(idx-1+reviews.children.length)%reviews.children.length; showSlide(); }
+setInterval(nextSlide,5000);
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68f3e11e39a3bf194fc8f672/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

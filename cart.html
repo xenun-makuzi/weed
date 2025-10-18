@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandpa’s Herbs Cart</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- EmailJS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("NHFB-BLLpTMnFelp_"); // Replace with your EmailJS Public Key
+  })();
+</script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- Navbar -->
+<nav class="bg-green-700 text-white sticky top-0 z-50 shadow">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">🌿 Grandpa’s Herbs</h1>
+    <a href="store.html" class="hover:underline">Back to Store</a>
+  </div>
+</nav>
+
+<!-- Cart Section -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <h2 class="text-3xl font-bold text-green-800 mb-6">Your Cart</h2>
+  <div id="cart-container" class="space-y-4"></div>
+</section>
+
+<!-- User Info Section -->
+<section class="max-w-7xl mx-auto px-6 pb-12">
+  <h2 class="text-2xl font-bold text-green-700 mb-4">Customer Information</h2>
+  <form id="user-form" class="space-y-4 bg-white p-6 rounded-2xl shadow">
+    <div>
+      <label for="name" class="block text-sm font-semibold mb-1">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600">
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-semibold mb-1">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600">
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold mb-2">Do you want delivery?</label>
+      <div class="flex gap-6">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="delivery" value="yes" required class="text-green-700">
+          Yes (+$50)
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="delivery" value="no" required class="text-green-700">
+          No
+        </label>
+      </div>
+    </div>
+
+    <div id="delivery-info" class="hidden">
+      <div>
+        <label for="address" class="block text-sm font-semibold mb-1">Delivery Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your delivery address" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600">
+      </div>
+
+      <div>
+        <label for="number" class="block text-sm font-semibold mb-1">Phone Number</label>
+        <input type="text" id="number" name="number" placeholder="Enter your phone number" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-600">
+      </div>
+    </div>
+
+    <div class="mt-6 flex justify-between items-center">
+      <p class="text-xl font-semibold">Total: $<span id="total-price">0.00</span></p>
+      <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-full hover:bg-green-800">Checkout</button>
+    </div>
+  </form>
+</section>
+
+<script>
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartContainer = document.getElementById('cart-container');
+const totalPriceEl = document.getElementById('total-price');
+const deliverySection = document.getElementById('delivery-info');
+const form = document.getElementById('user-form');
+
+function renderCart() {
+  cartContainer.innerHTML = '';
+  if(cart.length===0){
+    cartContainer.innerHTML = '<p class="text-gray-500">Your cart is empty.</p>';
+    totalPriceEl.textContent = '0.00';
+    return;
+  }
+
+  cart.forEach((item,index)=>{
+    const row = document.createElement('div');
+    row.className = 'flex items-center justify-between bg-white p-4 rounded-2xl shadow';
+
+    row.innerHTML = `
+      <div class="flex items-center gap-4">
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-full">
+        <div>
+          <p class="font-semibold">${item.name} (${item.selectedSize})</p>
+          <p class="text-gray-600">$${item.price}</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-1 bg-gray-200 rounded-full decrease">−</button>
+        <span class="quantity">1</span>
+        <button class="px-3 py-1 bg-gray-200 rounded-full increase">+</button>
+        <button class="px-3 py-1 bg-red-500 text-white rounded-full remove">✕</button>
+      </div>
+    `;
+
+    const quantityEl = row.querySelector('.quantity');
+    let quantity = 1;
+
+    row.querySelector('.increase').addEventListener('click', ()=>{
+      quantity++;
+      quantityEl.textContent = quantity;
+      updateTotal();
+    });
+
+    row.querySelector('.decrease').addEventListener('click', ()=>{
+      if(quantity>1) quantity--;
+      quantityEl.textContent = quantity;
+      updateTotal();
+    });
+
+    row.querySelector('.remove').addEventListener('click', ()=>{
+      cart.splice(index,1);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      renderCart();
+    });
+
+    cartContainer.appendChild(row);
+  });
+
+  updateTotal();
+}
+
+function updateTotal(){
+  let total = 0;
+  cartContainer.querySelectorAll('.quantity').forEach((el,i)=>{
+    total += cart[i].price * parseInt(el.textContent);
+  });
+
+  // Check if delivery is selected
+  const delivery = document.querySelector('input[name="delivery"]:checked');
+  if(delivery && delivery.value === 'yes') {
+    total += 50;
+  }
+
+  totalPriceEl.textContent = total.toFixed(2);
+}
+
+document.querySelectorAll('input[name="delivery"]').forEach(radio=>{
+  radio.addEventListener('change', ()=>{
+    if(radio.value === 'yes') {
+      deliverySection.classList.remove('hidden');
+      document.getElementById('address').required = true;
+      document.getElementById('number').required = true;
+    } else {
+      deliverySection.classList.add('hidden');
+      document.getElementById('address').required = false;
+      document.getElementById('number').required = false;
+    }
+    updateTotal();
+  });
+});
+
+// Checkout and EmailJS
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  if(cart.length===0) return alert('Cart is empty.');
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const delivery = document.querySelector('input[name="delivery"]:checked').value;
+  const address = document.getElementById('address').value || 'N/A';
+  const number = document.getElementById('number').value || 'N/A';
+
+  const orderDetails = cart.map((item, i)=>{
+    const quantity = cartContainer.querySelectorAll('.quantity')[i].textContent;
+    return `${item.name} (${item.selectedSize}) - Qty: ${quantity} - $${item.price * quantity}`;
+  }).join('\n');
+
+  const total = document.getElementById('total-price').textContent;
+
+  try {
+    await emailjs.send("Payment911", "template_b7erllf", {
+      name,
+      email,
+      address,
+      number,
+      message: `New Order from ${name}\n\nDelivery: ${delivery}\nAddress: ${address}\nPhone: ${number}\n\nOrder Details:\n${orderDetails}\n\nTotal: $${total}`,
+    });
+    alert('✅ Order placed successfully!');
+    localStorage.removeItem('cart');
+    window.location.href = "payout.html";
+  } catch (err) {
+    alert('❌ Failed to send order. Please try again.');
+    console.error("EmailJS Error:", err);
+  }
+});
+
+renderCart();
+</script>
+
+</body>
+</html>

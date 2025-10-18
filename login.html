@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notice</title>
+  <style>
+    :root {
+      --green: #2ecc71;
+      --white: #ffffff;
+      --dark: #1b1b1b;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--green) 40%, var(--white) 100%);
+      font-family: "Poppins", sans-serif;
+      color: var(--dark);
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      padding: 2.5rem 1.8rem;
+      animation: fadeIn 0.9s ease forwards;
+    }
+
+    h1 {
+      color: var(--green);
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn:hover {
+      background: #28b765;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(46, 204, 113, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Privacy Update</h1>
+    <p>
+      To keep our users anonymous, you no longer need to log in to use our services
+      or make purchases. All we require is your email at checkout.
+    </p>
+    <a href="store.html" class="btn">Back to Store</a>
+  </div>
+</body>
+</html>

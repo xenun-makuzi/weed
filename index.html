@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weed Maps - Home</title>
+  <meta name="description" content="Weed Farm offers high-quality herbs, flowers, and vapes. Discover natural remedies for holistic wellness.">
+  <meta name="keywords" content="herbs, natural remedies, flowers, vapes, wellness, weed farm">
+  <meta name="author" content="Weed Map">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- Navbar -->
+<nav class="bg-green-700 text-white sticky top-0 z-50 shadow">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">🌿 Weed Map</h1>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-6 items-center">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline">Login</a>
+      <a href="#categories" class="hover:underline">Categories</a>
+      <a href="#products" class="hover:underline">Products</a>
+      <a href="#reviews" class="hover:underline">Reviews</a>
+      <a href="store.html" class="hover:underline">View Store</a>
+      <!-- Cart Icon Always Visible -->
+      <a href="cart.html" class="relative">
+        🛒
+        <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">0</span>
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <div class="md:hidden">
+      <button id="menu-btn" class="focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (without cart inside) -->
+  <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-green-600">
+    <a href="index.html" class="block hover:underline">Home</a>
+    <a href="login.html" class="hover:underline">Login</a>
+    <a href="#categories" class="block hover:underline">Categories</a>
+    <a href="#products" class="block hover:underline">Products</a>
+    <a href="#reviews" class="block hover:underline">Reviews</a>
+    <a href="store.html" class="block hover:underline">View Store</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="bg-green-100">
+  <div class="max-w-7xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-green-800">Everything And More</h2>
+    <p class="mt-4 text-lg text-gray-700">Discover a wide range of flowers, vapes and more to ease your anxiety and lift your spirit.</p>
+    <a href="store.html" class="mt-6 inline-block bg-green-700 text-white px-6 py-3 rounded-lg shadow hover:bg-green-800">View Store</a>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section id="products" class="bg-white py-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <h3 class="text-2xl font-bold text-green-700 mb-6 text-center">Featured Products</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <!-- Product cards placeholders (5 items) -->
+      <div class="bg-green-50 p-4 rounded-lg shadow hover:shadow-lg text-center">
+        <img src="weed15.png" class="rounded w-full mb-2">
+        <h4 class="font-semibold text-green-800">AKO - Strawberry Banana Deli</h4>
+        <p class="text-gray-600">$28</p>
+        <button onclick="addToCart('AKO - Strawberry Banana Deli', 28)" class="mt-2 bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800">Add to Cart</button>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg shadow hover:shadow-lg text-center">
+        <img src="vape2.png" class="rounded w-full mb-2">
+        <h4 class="font-semibold text-green-800">Strawberry Cough Distillate Cartridge 0.5g</h4>
+        <p class="text-gray-600">$32</p>
+        <button onclick="addToCart('Strawberry Cough Distillate Cartridge 0.5g', 32)" class="mt-2 bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800">Add to Cart</button>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg shadow hover:shadow-lg text-center">
+        <img src="weed3.png" class="rounded w-full mb-2">
+        <h4 class="font-semibold text-green-800">Worner Bros - Blue Dream Deli</h4>
+        <p class="text-gray-600">$18</p>
+        <button onclick="addToCart('Worner Bros - Blue Dream Deli', 18)" class="mt-2 bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800">Add to Cart</button>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg shadow hover:shadow-lg text-center">
+        <img src="ed12.png" class="rounded w-full mb-2">
+        <h4 class="font-semibold text-green-800">UPLIFT Gum Drops</h4>
+        <p class="text-gray-600">$35</p>
+        <button onclick="addToCart('UPLIFT Gum Drops', 35)" class="mt-2 bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800">Add to Cart</button>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg shadow hover:shadow-lg text-center">
+        <img src="con4.png" class="rounded w-full mb-2">
+        <h4 class="font-semibold text-green-800">Pink Kush Terp Sugar - 1g</h4>
+        <p class="text-gray-600">$50</p>
+        <button onclick="addToCart('Pink Kush Terp Sugar - 1g', 50)" class="mt-2 bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery & Trust Section -->
+<section class="bg-green-50 py-12 text-center">
+  <div class="max-w-4xl mx-auto">
+    <h3 class="text-2xl font-bold text-green-700 mb-4">Why Choose Us?</h3>
+    <div class="grid md:grid-cols-3 gap-6 mt-6">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h4 class="font-semibold text-green-800 mb-2">Fast Delivery</h4>
+        <p class="text-gray-600">We deliver your orders safely and on time.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h4 class="font-semibold text-green-800 mb-2">Trusted for 5+ Years</h4>
+        <p class="text-gray-600">Over 1400 satisfied clients and growing.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h4 class="font-semibold text-green-800 mb-2">Reliable & High Quality</h4>
+        <p class="text-gray-600">We ensure quality products and excellent service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Business Stats -->
+<section class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+    <div class="bg-green-50 p-6 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="text-4xl font-bold text-green-700">5+</h4>
+      <p class="mt-2 text-gray-700 text-lg">Years in Business</p>
+    </div>
+    <div class="bg-green-50 p-6 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="text-4xl font-bold text-green-700">1400+</h4>
+      <p class="mt-2 text-gray-700 text-lg">Satisfied Clients</p>
+    </div>
+    <div class="bg-green-50 p-6 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="text-4xl font-bold text-green-700">100%</h4>
+      <p class="mt-2 text-gray-700 text-lg">Reliable & Trusted Service</p>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="max-w-6xl mx-auto px-6 py-16 text-center">
+  <h3 class="text-3xl font-bold text-green-700 mb-6">About Us</h3>
+  <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+    Our goal is to provide our customers with the highest level of customer service, create a welcoming space & to find what will best suit your needs. Your needs as a customer is the number one priority for our team of highly trained budtenders and managers. Stop in today and ask as many questions as you need to find what you're on the search for.
+  </p>
+</section>
+
+<!-- Reviews Carousel -->
+<section id="reviews" class="bg-green-100 py-12">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h3 class="text-2xl font-bold text-green-700 mb-6">What Our Customers Say</h3>
+    <div class="relative overflow-hidden">
+      <div id="review-cards" class="flex transition-transform duration-500">
+        <div class="min-w-full p-6">
+          <p class="italic text-gray-700">“The herbs are pure and very effective. My family loves them.”</p>
+          <div class="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          <h4 class="mt-2 font-semibold">— Miriam K.</h4>
+        </div>
+        <div class="min-w-full p-6">
+          <p class="italic text-gray-700">“Bestonlinr shop I’ve used. Highly recommend.”</p>
+          <div class="mt-3 text-yellow-500">⭐⭐⭐⭐</div>
+          <h4 class="mt-2 font-semibold">— John D.</h4>
+        </div>
+        <div class="min-w-full p-6">
+          <p class="italic text-gray-700">“Quick delivery and excellent customer service!”</p>
+          <div class="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          <h4 class="mt-2 font-semibold">— Sarah M.</h4>
+        </div>
+        <div class="min-w-full p-6">
+          <p class="italic text-gray-700">“Very reliable. My go-to store for quick remedies.”</p>
+          <div class="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          <h4 class="mt-2 font-semibold">— David L.</h4>
+        </div>
+        <div class="min-w-full p-6">
+          <p class="italic text-gray-700">“High-quality products and excellent prices!”</p>
+          <div class="mt-3 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          <h4 class="mt-2 font-semibold">— Emily R.</h4>
+        </div>
+      </div>
+      <button onclick="prevSlide()" class="absolute top-1/2 left-2 bg-green-700 text-white px-3 py-1 rounded-full">‹</button>
+      <button onclick="nextSlide()" class="absolute top-1/2 right-2 bg-green-700 text-white px-3 py-1 rounded-full">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-green-700 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+    <p>&copy; 2025 Weed Maps. All rights reserved.</p>
+    <div class="space-x-4 mt-3 md:mt-0">
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <a href="#" class="hover:underline">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartCount = document.getElementById('cart-count');
+cartCount.textContent = cart.length;
+
+function addToCart(name, price){
+  cart.push({name, price, quantity: 1});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  cartCount.textContent = cart.length;
+
+  // Popup confirmation
+  const popup = document.createElement('div');
+  popup.textContent = `${name} added to cart`;
+  popup.className = 'fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow';
+  document.body.appendChild(popup);
+  setTimeout(()=>popup.remove(), 2000);
+}
+
+// Reviews carousel
+const reviews = document.getElementById('review-cards');
+let reviewIndex = 0;
+function showSlide(){ reviews.style.transform = `translateX(${-reviewIndex*100}%)`; }
+function nextSlide(){ reviewIndex=(reviewIndex+1)%reviews.children.length; showSlide(); }
+function prevSlide(){ reviewIndex=(reviewIndex-1+reviews.children.length)%reviews.children.length; showSlide(); }
+setInterval(nextSlide,5000);
+
+// Mobile menu toggle
+const menuBtn=document.getElementById('menu-btn');
+const mobileMenu=document.getElementById('mobile-menu');
+menuBtn.addEventListener('click',()=>{mobileMenu.classList.toggle('hidden');});
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68f3e11e39a3bf194fc8f672/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

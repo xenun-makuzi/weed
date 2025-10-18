@@ -1,0 +1,489 @@
+[
+  {
+    "name": "Tanana - Cookies & Cream Deli",
+    "type": "Flower",
+    "image": "weed1.png",
+    "prices": {
+      "1g": 20,
+      "0.5g": 12,
+      "1oz": 5,
+      "0.5oz": 3,
+      "0.25oz": 2
+    }
+  },
+  {
+    "name": "Worner Brothers - Honey Banana Deli",
+    "type": "Flower",
+    "image": "weed2.png",
+    "prices": {
+      "1g": 14,
+      "0.5oz": 150,
+      "0.25oz": 90
+    }
+  },
+  {
+    "name": "Worner Bros - Blue Dream Deli",
+    "type": "Flower",
+    "image": "weed3.png",
+    "prices": {
+      "1g": 12,
+      "0.5oz": 150,
+      "0.25oz": 90
+    }
+  },
+  {
+    "name": "Freedom 49 - Katsu Bubba Kush",
+    "type": "Flower",
+    "image": "weed4.png",
+    "prices": {
+      "1g": 12,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 70
+    }
+  },
+  {
+    "name": "Tanana - GG#4 Deli",
+    "type": "Flower",
+    "image": "weed5.png",
+    "prices": {
+      "1g": 10,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 65
+    }
+  },
+  {
+    "name": "Worner Brothers - GSC Deli",
+    "type": "Flower",
+    "image": "weed6.png",
+    "prices": {
+      "1g": 10,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 65
+    }
+  },
+  {
+    "name": "QHRONIQ - Malawi Deli",
+    "type": "Flower",
+    "image": "weed7.png",
+    "prices": {
+      "1g": 12,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 70
+    }
+  },
+  {
+    "name": "AK Legacy Genetics - Bubba Kush Deli",
+    "type": "Flower",
+    "image": "weed8.png",
+    "prices": {
+      "1g": 10,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 65
+    }
+  },
+  {
+    "name": "Enlighten Gardens - Pink Certz Deli",
+    "type": "Flower",
+    "image": "weed9.png",
+    "prices": {
+      "1g": 8,
+      "1oz": 180,
+      "0.5oz": 100,
+      "0.25oz": 60
+    }
+  },
+  {
+    "name": "Flower Mountain Farms - Pressure Pie Deli",
+    "type": "Flower",
+    "image": "weed10.png",
+    "prices": {
+      "1g": 8,
+      "1oz": 180,
+      "0.5oz": 100,
+      "0.25oz": 60
+    }
+  },
+  {
+    "name": "The Hangar - Citrus Crasher Deli",
+    "type": "Flower",
+    "image": "weed11.png",
+    "prices": {
+    "1g": 10,
+      "1oz": 180,
+      "0.5oz": 100,
+      "0.25oz": 65
+    }
+  },
+  {
+    "name": "Worner Brothers - Notorious THC Deli",
+    "type": "Flower",
+    "image": "weed12.png",
+    "prices": {
+      "1g": 12,
+      "1oz": 200,
+      "0.5oz": 120,
+      "0.25oz": 70
+    }
+  },
+  {
+    "name": "Mercy Tree - Mercy Fruit Haze Deli",
+    "type": "Flower",
+    "image": "weed13.png",
+    "prices": {
+      "1g": 8,
+      "1oz": 180,
+      "0.5oz": 100,
+      "0.25oz": 60
+    }
+  },
+  {
+    "name": "AK Legends - Oregon Lemons Deli",
+    "type": "Flower",
+    "image": "weed14.png",
+    "prices": {
+      "1g": 10,
+      "1oz": 200,
+      "0.5oz": 110,
+      "0.25oz": 65
+    }
+  },
+  {
+    "name": "AKO - Strawberry Banana Deli",
+    "type": "Flower",
+    "image": "weed15.png",
+    "prices": {
+      "1g": 8,
+      "1oz": 180,
+      "0.5oz": 100,
+      "0.25oz": 60
+    }
+  },
+  {
+    "name": "Strawberry Cough Distillate Cartridge",
+    "type": "Vape Pens",
+    "image": "vape2.png",
+    "prices": {
+      ".5g": 30
+    }
+  },
+  {
+    "name": "Banana Runtz Distillate Cartridge",
+    "type": "Vape Pens",
+    "image": "vape1.png",
+    "prices": {
+      "1g": 30
+    }
+  },
+  {
+    "name": "Blackberry Lemonade Distillate Cartridge",
+    "type": "Vape Pens",
+    "image": "vape4.png",
+    "prices": {
+      "0.5g": 30
+    }
+  },
+  {
+    "name": "Raspberry Lime Distillate Puff Pod",
+    "type": "Vape Pens",
+    "image": "vape5.png",
+    "prices": {
+      "0.5g": 35
+    }
+  },
+  {
+    "name": "Tangie Sauce Cart",
+    "type": "Vape Pens",
+    "image": "vape3.png",
+    "prices": {
+      "1": 50
+    }
+  },
+  {
+    "name": "UNWIND Vape Cartridge 80% THC",
+    "type": "Vape Pens",
+    "image": "vape6.png",
+    "prices": {
+      "0.5g": 30,
+      "1g":60
+    }
+  },
+  {
+    "name": "UPLIFT Vape Cartridge",
+    "type": "Vape Pens",
+    "image": "vape7.png",
+    "prices": {
+      "1g": 30,
+      "0.5g": 60
+    }
+  },
+  {
+    "name": "Cold Creek Extracts - Amnesia 1g Distillate Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1": 55
+    }
+  },
+  {
+    "name": "AKO - Blue Banana .5g Rosin Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "0.5g": 45
+    }
+  },
+   {
+    "name": "AKO - Glitter Bomb 1g Sauce Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 60,
+      ".5g":45
+    }
+  },
+   {
+    "name": "AKO - Hermicha . Rosin Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 45,
+      ".5g":60
+    }
+  },
+   {
+    "name": "AKO - Lemon Tree Sauce Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 55,
+      ".5g": 45
+    }
+  },
+   {
+    "name": "AKO - Oreoz Rosin Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 55,
+      ".5g": 45
+    }
+  },
+   {
+    "name": "AKO - ROSEWATER  BHO Sauce Vape CArt",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 55,
+      ".5g": 45
+    }
+  },
+   {
+    "name": "AKO - Strawberry Banana Rosin Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 55,
+      ".5g": 45
+    }
+  },
+   {
+    "name": "Arctic Honey - Bubble Gum Distillate Vape Pod",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 60,
+      ".5g": 50
+    }
+  },
+   {
+    "name": "AKO - Watermelon Zkittles  BHO Sauce Vape Cart",
+    "type": "Vape Pens",
+    "image": "vape8.png",
+    "prices": {
+      "1g": 55,
+      ".5g": 45
+    }
+  },
+  {
+    "name": "Dragonfruit Heavenly Konfections | Sativa",
+    "type": "Edibles",
+    "image": "ed1.png",
+    "prices": {
+      "100mg": 22
+    }
+  },
+
+  {
+    "name": "POG Heavenly Konfections | Indica ",
+    "type": "Edibles",
+    "image": "ed2.png",
+    "prices": {
+      "100mg": 22
+    }
+  },
+  {
+    "name": "Chocolate Chip Cookies with Ube and Toasted Coconut 10 Pack",
+    "type": "Edibles",
+    "image": "ed3.png",
+    "prices": {
+      "100mg": 22
+    }
+  },
+  {
+    "name": "Coffee Kreative Karamels | Sativa",
+    "type": "Edibles",
+    "image": "ed4.png",
+    "prices": {
+      "100mg": 22
+    }
+  },
+  {
+    "name": "POG Gummies (Passionfruit Orange Guava) | 10-Pack",
+    "type": "Edibles",
+    "image": "ed5.png",
+    "prices": {
+      "100mg": 24
+    }
+  },
+  {
+    "name": "Banana Heavenly Konfections | Sativa",
+    "type": "Edibles",
+    "image": "ed6.png",
+    "prices": {
+      "100mg": 23
+    }
+  },
+  {
+    "name":"COAST Gum Drops",
+    "type": "Edibles",
+    "image": "ed8.png",
+    "prices": {
+      "100mg": 25
+    }
+  },
+  {
+    "name": "Grape Heavenly Konfections | Indica",
+    "type": "Edibles",
+    "image": "ed9.png",
+    "prices": {
+      "100mg": 16
+    }
+  },
+  {
+    "name": "Tiger's Blood Heavenly Konfections | Indica",
+    "type": "Edibles",
+    "image": "ed10.png",
+    "prices": {
+      "100mg": 22
+    }
+  },
+   {
+    "name": "Truffles",
+    "type": "Edibles",
+    "image": "ed11.png",
+    "prices": {
+      "100mg": 35
+    }
+  },
+   {
+    "name": "UNWIND Gum Drops",
+    "type": "Edibles",
+    "image": "ed13.png",
+    "prices": {
+      "100mg": 25
+    }
+  },
+   {
+    "name": "UPLIFT Gum Drops",
+    "type": "Edibles",
+    "image": "ed12.png",
+    "prices": {
+      "100mg": 25
+    }
+  },
+  {
+    "name": "Strawberry Banana Sugarwax",
+    "type": "Concentrates",
+    "image": "con1.png",
+    "prices": {
+      "1g": 45
+    }
+  },
+  {
+    "name": "Tangie Sugarwax",
+    "type": "Concentrates",
+    "image": "con2.png",
+    "prices": {
+      "1g": 45
+    }
+  },
+  {
+    "name": "GMO Cookies Sugarwax",
+    "type": "Concentrates",
+    "image": "con3.png",
+    "prices": {
+      "1g": 45
+    }
+  },
+  {
+    "name": "Pink Kush Terp Sugar - 1g",
+    "type": "Concentrates",
+    "image": "con4.png",
+    "prices": {
+      "1g": 50
+    }
+  },
+  {
+    "name": "Sour AI Sugarwax",
+    "type": "Concentrates",
+    "image": "con5.png",
+    "prices": {
+      "1g": 48
+    }
+  },
+  {
+    "name": "Strawberry Gelato Terp Sugar - 1g",
+    "type": "Concentrates",
+    "image": "con6.png",
+    "prices": {
+      "1g": 53
+    }
+  },
+  {
+    "name": "Tundra Farms GP OG 1g Sugar",
+    "type": "Concentrates",
+    "image": "con7.png",
+    "prices": {
+      "1g": 40
+    }
+  },
+  {
+    "name": "GoodSinse - FECO Stick 1g",
+    "type": "Concentrates",
+    "image": "con8.png",
+    "prices": {
+      "1g": 20
+    }
+  },
+  {
+    "name": "AKO - Strawberry Banana 1g Rosin",
+    "type": "Concentrates",
+    "image": "con9.png",
+    "prices": {
+      "1g": 60
+    }
+  },
+  {
+    "name": "Herb E",
+    "type": "Herb 5",
+    "image": "https://via.placeholder.com/200",
+    "prices": {
+      "1g": 100
+    }
+  }
+]
